@@ -1,0 +1,9 @@
+.gradle
+.idea
+build
+
+# Test server
+extensions
+minecraft_data
+
+notes.md

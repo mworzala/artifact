@@ -1,0 +1,5 @@
+{
+  "entrypoint": "com.mattworzala.artifact.extension.ArtifactExtension",
+  "name": "Artifact",
+  "version": "1.0"
+}
