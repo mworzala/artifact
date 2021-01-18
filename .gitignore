@@ -3,6 +3,7 @@
 build
 
 # Test server
+.mixin.out
 extensions
 minecraft_data
 

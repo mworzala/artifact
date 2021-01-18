@@ -23,7 +23,7 @@ subprojects {
         "implementation"("com.google.code.gson", "gson", "2.8.6")
 
         "implementation"("net.kyori", "adventure-api", "4.3.0")
-        "implementation"("com.github.mworzala", "resource", "50e5ebd108")
+        "implementation"("com.github.mworzala", "resource", "13bfa02dde")
 
         "implementation"("com.github.Minestom", "Minestom", "ada1e49d3c")
     }
