@@ -1,5 +1,6 @@
 {
   "entrypoint": "com.mattworzala.artifact.extension.ArtifactExtension",
   "name": "Artifact",
-  "version": "1.0"
+  "version": "1.0",
+  "mixinConfig": "artifact.mixins.json"
 }

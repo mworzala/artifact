@@ -1,6 +1,7 @@
 package com.mattworzala.artifact.api.item;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.mattworzala.resource.Identifier;
 import com.mattworzala.resource.Resource;
 import com.mattworzala.resource.registry.MutableRegistry;
@@ -41,6 +42,13 @@ public interface ItemType extends Resource {
         @Override
         public @NotNull Identifier getId() {
             return id;
+        }
+
+        protected void assertPresent(JsonObject obj, String... fields) {
+            for (String field : fields) {
+                if (!obj.has(field))
+                    throw new JsonParseException("Missing required field '" + field + "' in " + obj);
+            }
         }
     }
 }

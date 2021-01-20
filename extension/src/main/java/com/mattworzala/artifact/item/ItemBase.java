@@ -21,8 +21,7 @@ public interface ItemBase extends Item {
 
     @Override
     default @NotNull ItemStack create(int amount) {
-        //todo ArtifactItemStack
-        ItemStack itemStack = new ItemStack(getItem(), (byte) amount);
+        ItemStack itemStack = new ArtifactItemStackImpl(this, getItem(), (byte) amount);
         itemStack.setDisplayName(MinestomComponentSerializer.get()
                 .serialize(AdventureUtil.defaultNoItalic(getTitle())));
         itemStack.setLore(getDescription().stream()

@@ -16,11 +16,9 @@ import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+//todo need to handle this all better. tags and types can be null which causes annoyance when deciding to return parent or it.
 @SuppressWarnings("unused")
 public class FileResourceItem implements ItemBase, PostProcessed {
     @Required
@@ -67,24 +65,28 @@ public class FileResourceItem implements ItemBase, PostProcessed {
 
     @Override
     public @NotNull Set<ItemTag> getTags() {
-        Set<ItemTag> tags = Set.copyOf(this.tags.values());
-        if (tags == null && this.parent != null)
-            tags = this.parent.getTags();
-        return tags == null ? Collections.emptySet() : Collections.unmodifiableSet(tags);
+        Collection<ItemTag> tags = null;
+        if (this.tags != null) tags = this.tags.values();
+        if (tags == null && this.parent != null) tags = this.parent.getTags();
+        return tags == null ? Collections.emptySet() : Set.copyOf(tags);
     }
 
     @Override
     public <T extends ItemType> @Nullable T getType(@NotNull Identifier id) {
-        //noinspection unchecked
-        return (T) this.tags.get(id);
+        if (this.types == null) {
+            if (this.parent != null)
+                return this.parent.getType(id);
+            return null;
+        }
+        return (T) this.types.get(id);
     }
 
     @Override
     public @NotNull Set<ItemType> getTypes() {
-        Set<ItemType> types = Set.copyOf(this.types.values());
-        if (types == null && this.parent != null)
-            types = this.parent.getTypes();
-        return types == null ? Collections.emptySet() : Collections.unmodifiableSet(types);
+        Collection<ItemType> types = null;
+        if (this.types != null) types = this.types.values();
+        if (types == null && this.parent != null) types = this.parent.getTypes();
+        return types == null ? Collections.emptySet() : Set.copyOf(types);
     }
 
     @Override
