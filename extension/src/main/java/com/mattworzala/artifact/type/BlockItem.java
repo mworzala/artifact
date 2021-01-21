@@ -57,16 +57,16 @@ public class BlockItem implements ItemType {
 
         //todo for now assume if not ArtifactItemStack then it cannot be an artifact item
         //     (in reality should check data container for "artifact:id")
-        if (itemStack instanceof ArtifactItemStack) {
-            Item item = ((ArtifactItemStack) itemStack).getItem();
+        ArtifactItemStack artifactStack = ArtifactItemStack.of(itemStack);
+        if (artifactStack == null) return;
+        Item item = artifactStack.getItem();
 
-            BlockItem blockItem = item.getType(TYPE_ID);
-            if (blockItem == null)
-                return;
+        BlockItem blockItem = item.getType(TYPE_ID);
+        if (blockItem == null)
+            return;
 
-            event.setCustomBlock(blockItem.getBlock());
-            event.setBlockStateId(blockItem.getDisplayId());
-        }
+        event.setCustomBlock(blockItem.getBlock());
+        event.setBlockStateId(blockItem.getDisplayId());
     }
 
     /**

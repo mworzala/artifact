@@ -7,7 +7,7 @@ import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
 
 public class ArtifactItemStackImpl extends ItemStack implements ArtifactItemStack {
-    private final Item item;
+    private Item item;
 
     public ArtifactItemStackImpl(@NotNull Item item, @NotNull Material material, byte amount) {
         super(material, amount);
@@ -17,5 +17,14 @@ public class ArtifactItemStackImpl extends ItemStack implements ArtifactItemStac
     @Override
     public @NotNull Item getItem() {
         return this.item;
+    }
+
+
+    @NotNull
+    @Override
+    public ItemStack clone() {
+        ArtifactItemStackImpl itemStack = (ArtifactItemStackImpl) super.clone();
+        itemStack.item = this.item;
+        return itemStack;
     }
 }

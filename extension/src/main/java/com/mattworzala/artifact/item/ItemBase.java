@@ -32,8 +32,8 @@ public interface ItemBase extends Item {
         itemStack.setUnbreakable(true);
         itemStack.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
         Data data = new DataImpl();
-        data.set("artifact:id", getId().toString(), String.class);
-        data.set("artifact:tags", getTags().stream()
+        data.set(Item.ID_KEY, getId().toString(), String.class);
+        data.set(Item.TAG_KEY, getTags().stream()
                 .map(tag -> tag.getId().toString())
                 .collect(Collectors.toList()), List.class);
         itemStack.setData(data);

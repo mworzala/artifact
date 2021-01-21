@@ -16,6 +16,8 @@ import java.util.Set;
 
 public interface Item extends Resource {
     Registry<Item> REGISTRY = MutableRegistry.newThreadSafeRegistry();
+    String ID_KEY = "artifact:id";
+    String TAG_KEY = "artifact:tags";
 
     /**
      * Gets the id of this item.

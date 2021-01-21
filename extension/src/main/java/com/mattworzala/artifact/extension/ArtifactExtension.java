@@ -13,31 +13,22 @@ import com.mattworzala.artifact.json.extra.IdentifierAdapter;
 import com.mattworzala.artifact.json.extra.MinestomAdapters;
 import com.mattworzala.artifact.json.extra.MiniMessageAdapters;
 import com.mattworzala.artifact.type.BlockItem;
+import com.mattworzala.artifact.type.InteractableItem;
 import com.mattworzala.resource.Identifier;
 import com.mattworzala.resource.json.process.PostProcessor;
 import com.mattworzala.resource.loader.FileResourceLoader;
 import com.mattworzala.resource.loader.RegistryFileResourceLoader;
 import com.mattworzala.resource.registry.MutableRegistry;
 import com.mattworzala.resource.registry.Registry;
-import com.mattworzala.resource.registry.ThreadSafeMapRegistry;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
-import net.minestom.server.event.player.PlayerBlockPlaceEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.extensions.Extension;
-import net.minestom.server.instance.block.Block;
-import net.minestom.server.inventory.Inventory;
-import net.minestom.server.inventory.InventoryType;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
-import net.minestom.server.item.metadata.MapMeta;
-import net.minestom.server.map.Framebuffer;
-import net.minestom.server.map.framebuffers.Graphics2DFramebuffer;
-import net.minestom.server.network.packet.server.play.MapDataPacket;
 
-import java.awt.*;
 import java.nio.file.Paths;
 
 public class ArtifactExtension extends Extension {
@@ -49,7 +40,7 @@ public class ArtifactExtension extends Extension {
 
         // Register ItemTypes
         Registry.register(ItemType.REGISTRY, BlockItem.TYPE_ID, BlockItem.FACTORY);
-//        ThreadSafeMapRegistry
+        Registry.register(ItemType.REGISTRY, InteractableItem.TYPE_ID, InteractableItem.FACTORY);
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapterFactory(new PostProcessor())
