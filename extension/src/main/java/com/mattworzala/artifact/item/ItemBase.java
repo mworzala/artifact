@@ -22,9 +22,11 @@ public interface ItemBase extends Item {
     @Override
     default @NotNull ItemStack create(int amount) {
         ItemStack itemStack = new ArtifactItemStackImpl(this, getItem(), (byte) amount);
+        //todo could cache the json message versions of the components to avoid serialization
         itemStack.setDisplayName(MinestomComponentSerializer.get()
                 .serialize(AdventureUtil.defaultNoItalic(getTitle())));
         itemStack.setLore(getDescription().stream()
+                //todo better approach to defaultNoItalic?
                 .map(AdventureUtil::defaultNoItalic)
                 .map(MinestomComponentSerializer.get()::serialize)
                 .collect(Collectors.toList()));
@@ -32,6 +34,12 @@ public interface ItemBase extends Item {
         itemStack.setUnbreakable(true);
         itemStack.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
         Data data = new DataImpl();
+        // Apply type data
+        getTypes().stream()
+                .sorted((a, b) -> -a.compareTo(b))
+                .forEach(it -> it.applyData(data));
+        // Apply artifact data
+        // todo could probably cache the tag list
         data.set(Item.ID_KEY, getId().toString(), String.class);
         data.set(Item.TAG_KEY, getTags().stream()
                 .map(tag -> tag.getId().toString())

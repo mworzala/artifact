@@ -38,26 +38,69 @@ public interface Item extends Resource {
      */
     @NotNull Material getItem();
 
-    // Tags
-
+    /**
+     * Checks if this Item has a given item tag.
+     *
+     * @param tag The tag to check
+     * @return True if this item has the tag, false otherwise
+     */
     default boolean hasTag(@NotNull ItemTag tag) {
         return hasTag(tag.getId());
     }
 
+    /**
+     * Checks if this Item has a given item tag.
+     *
+     * @param id The id to check
+     * @return True if this item has the tag, false otherwise
+     */
     boolean hasTag(@NotNull Identifier id);
 
+    /**
+     * Gets an immutable set of the item tags attached to this Item.
+     *
+     * @return All tags attached to the item
+     */
     @NotNull Set<ItemTag> getTags();
 
-    // Types
-
+    /**
+     * Gets an ItemType attached to this Item, or null if there is no such type.
+     *
+     * @param id The type to get
+     * @param <T> The type of the item type
+     * @return The type instance, or null if missing
+     */
     <T extends ItemType> @Nullable T getType(@NotNull Identifier id);
 
+    /**
+     * Gets an immutable set of the item types attached to this Item.
+     * <p>
+     * The ordering of the set is undefined, however ItemType is comparable to itself.
+     *
+     * @return All types attached to this item
+     *
+     * @see ItemType#compareTo(ItemType)
+     */
     @NotNull Set<ItemType> getTypes();
 
-    // Metadata
-
+    /**
+     * Gets the title of the Item. Used as the display name when creating
+     * an {@link ItemStack} from the item.
+     *
+     * @return The item title
+     */
     @NotNull Component getTitle();
 
+    /**
+     * Gets the base lore for the item. This lore will be the first lines of
+     * lore no matter what is added by types on the item.
+     * <p>
+     * ItemTypes should be used to attach dynamic lore.
+     *
+     * @return The description of the item
+     *
+     * @see ItemType#applyLore()
+     */
     @NotNull List<Component> getDescription();
 
     /**
