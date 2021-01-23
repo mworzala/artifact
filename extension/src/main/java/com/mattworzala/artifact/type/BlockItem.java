@@ -55,8 +55,6 @@ public class BlockItem implements ItemType {
     private static void handleBlockPlace(PlayerBlockPlaceEvent event) {
         ItemStack itemStack = event.getPlayer().getItemInHand(event.getHand());
 
-        //todo for now assume if not ArtifactItemStack then it cannot be an artifact item
-        //     (in reality should check data container for "artifact:id")
         ArtifactItemStack artifactStack = ArtifactItemStack.of(itemStack);
         if (artifactStack == null) return;
         Item item = artifactStack.getItem();

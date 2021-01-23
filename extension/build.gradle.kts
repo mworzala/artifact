@@ -39,17 +39,8 @@ tasks {
         }
     }
 
-    task<Copy>("copyJar") {
-        from("build/libs")
-        include("*-all.jar")
-
-        into(file("../extensions"))
-
-        dependsOn(named("shadowJar"))
-    }
-
     build {
-        dependsOn(named("copyJar"))
+        dependsOn(named("shadowJar"))
     }
 
 
