@@ -1,0 +1,47 @@
+{
+  "#notes": [
+    "This represents a 'NamedLootTable', however an 'AnonymousLootTable' may be used inline.",
+    "AnonymousLootTable is just the 'loot' section of this schema."
+  ],
+  "id": "artifact:test",
+  "loot": [
+    {
+      "rolls": "Amount",
+      "entries": [
+        {
+          "type": "empty",
+          "weight": "Amount"
+        },
+        {
+          "type": "item",
+          "weight": "Amount",
+          "item": "ItemRef",
+          "modifiers": [
+            {
+              "id": "artifact:count",
+              "count": "Amount"
+            },
+            {
+              "id": "artifact:limit",
+              "limit": "Amount"
+            },
+            {
+              "id": "artifact:data",
+              "data": "JSON"
+            }
+          ]
+        },
+        {
+          "type": "loot_table",
+          "weight": "Amount",
+          "ref": "NamedLootTable|AnonymousLootTable",
+          "modifiers": [
+            "..."
+          ]
+        },
+        "..."
+      ]
+    },
+    "..."
+  ]
+}
