@@ -43,5 +43,16 @@ tasks {
         dependsOn(named("shadowJar"))
     }
 
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                groupId = "com.mattworzala.artifact"
+                artifactId = "extension"
+                version = "1.0"
 
+                from(project.components["java"])
+            }
+        }
+    }
 }
+
